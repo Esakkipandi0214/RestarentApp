@@ -97,7 +97,7 @@ const OrderSummary: React.FC = () => {
                 onClick={() => markAsReady(order.orderId)}
                 className="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
               >
-                Mark as Delivered
+                Mark as Ready
               </button>
             )}
           </div>
