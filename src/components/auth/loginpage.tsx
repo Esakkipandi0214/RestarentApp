@@ -51,7 +51,7 @@ const LoginForm: FC = () => {
       setDescription("Logged in successfully!");
       setIsVisible(true);
       // Redirect to the dashboard or other page after successful sign-in
-      window.location.href ='/dashbaord';
+      window.location.href ='/dashboard';
     } catch (error) {
         setTitle("Failure");
       setDescription("Login failed. Please check your email and password.");

@@ -41,7 +41,7 @@ const Sidebar: React.FC = () => {
         <nav className="space-y-2">
           <button
             className="w-full text-left p-2 hover:bg-gray-700 rounded"
-            onClick={() => navigateTo('/dashbaord')}
+            onClick={() => navigateTo('/dashboard')}
           >
             Dashboard
           </button>
