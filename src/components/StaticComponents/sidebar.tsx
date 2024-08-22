@@ -82,6 +82,12 @@ const Sidebar: React.FC = () => {
           Billing Items
           </button>
           <button
+            className="w-full text-left p-2 hover:bg-gray-700 rounded"
+            onClick={() => navigateTo('/History-orders')}
+          >
+          Orders Mangement
+          </button>
+          <button
             className="w-full text-left p-2 hover:bg-gray-700 rounded bg-red-600 mt-4"
             onClick={handleLogout}
           >

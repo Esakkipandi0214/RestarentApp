@@ -9,6 +9,7 @@ const StatusVerificationTable = lazy(() => import('./components/Admin/StatusVeri
 const Sidebar = lazy(() => import('./components/StaticComponents/sidebar'));
 const AddMenuItem = lazy(() => import('./components/Admin/AddMenu'));
 const Menu = lazy(() => import('./components/Admin/MenuView'));
+const OrdersHistory = lazy(() => import('./components/Admin/OrdersHistory'));
 const Orders = lazy(() => import('./components/chef/Orders'));
 const Delivery = lazy(() => import('./components/Waiter/Delivery'));
 const BillingOrders = lazy(() => import('./components/Admin/BiilingOrder'));
@@ -30,6 +31,7 @@ function App() {
             <Route path="/view-orders" element={<Orders />} />
             <Route path="/delivery-orders" element={<Delivery />} />
             <Route path="/Billing-orders" element={<BillingOrders />} />
+            <Route path="/History-orders" element={<OrdersHistory />} />
             <Route path="*" element={<Navigate to="/login" />} />
           </Routes>
         </Suspense>
