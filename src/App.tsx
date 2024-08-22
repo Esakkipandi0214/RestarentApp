@@ -14,7 +14,6 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Routes>
-          <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} /> {/* Fixed spelling */}
           <Route path="/dashboard" element={<MainDash />} /> {/* Fixed spelling */}
           <Route path="/all-profile" element={<Profile />} />
@@ -23,6 +22,7 @@ function App() {
           <Route path="/add-menu" element={<AddMenuItem />} /> {/* Fixed spelling */}
           <Route path="/view-menu" element={<Menu />} /> {/* Fixed spelling */}
           <Route path="*" element={<Navigate to="/login" />} />
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
       </div>
     </BrowserRouter>
