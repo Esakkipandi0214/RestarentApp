@@ -9,6 +9,9 @@ const StatusVerificationTable = lazy(() => import('./components/Admin/StatusVeri
 const Sidebar = lazy(() => import('./components/StaticComponents/sidebar'));
 const AddMenuItem = lazy(() => import('./components/Admin/AddMenu'));
 const Menu = lazy(() => import('./components/Admin/MenuView'));
+const Orders = lazy(() => import('./components/chef/Orders'));
+const Delivery = lazy(() => import('./components/Waiter/Delivery'));
+const BillingOrders = lazy(() => import('./components/Admin/BiilingOrder'));
 
 function App() {
   return (
@@ -23,7 +26,10 @@ function App() {
             <Route path="/employee-verification" element={<StatusVerificationTable />} />
             <Route path="/sidebar" element={<Sidebar />} />
             <Route path="/add-menu" element={<AddMenuItem />} />
-            <Route path="/view-menu" element={<Menu />} />
+            <Route path="/view-menu/:tableName" element={<Menu />} />
+            <Route path="/view-orders" element={<Orders />} />
+            <Route path="/delivery-orders" element={<Delivery />} />
+            <Route path="/Billing-orders" element={<BillingOrders />} />
             <Route path="*" element={<Navigate to="/login" />} />
           </Routes>
         </Suspense>

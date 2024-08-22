@@ -64,6 +64,24 @@ const Sidebar: React.FC = () => {
           Add Menu
           </button>
           <button
+            className="w-full text-left p-2 hover:bg-gray-700 rounded"
+            onClick={() => navigateTo('/view-orders')}
+          >
+          Order Items
+          </button>
+          <button
+            className="w-full text-left p-2 hover:bg-gray-700 rounded"
+            onClick={() => navigateTo('/delivery-orders')}
+          >
+          Delivery Items
+          </button>
+          <button
+            className="w-full text-left p-2 hover:bg-gray-700 rounded"
+            onClick={() => navigateTo('/Billing-orders')}
+          >
+          Billing Items
+          </button>
+          <button
             className="w-full text-left p-2 hover:bg-gray-700 rounded bg-red-600 mt-4"
             onClick={handleLogout}
           >
