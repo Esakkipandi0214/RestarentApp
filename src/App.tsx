@@ -14,15 +14,15 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Routes>
-          <Route path="/register" element={<RegisterPage />} /> {/* Fixed spelling */}
-          <Route path="/dashboard" element={<MainDash />} /> {/* Fixed spelling */}
-          <Route path="/all-profile" element={<Profile />} />
-          <Route path="/employee-verification" element={<StatusVerificationTable />} /> {/* Fixed spelling */}
-          <Route path="/sidebar" element={<Sidebar />} />
-          <Route path="/add-menu" element={<AddMenuItem />} /> {/* Fixed spelling */}
-          <Route path="/view-menu" element={<Menu />} /> {/* Fixed spelling */}
-          <Route path="*" element={<Navigate to="/login" />} />
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="https://restarent-app.vercel.app/register" element={<RegisterPage />} /> {/* Fixed spelling */}
+          <Route path="https://restarent-app.vercel.app/dashboard" element={<MainDash />} /> {/* Fixed spelling */}
+          <Route path="https://restarent-app.vercel.app/all-profile" element={<Profile />} />
+          <Route path="https://restarent-app.vercel.app/employee-verification" element={<StatusVerificationTable />} /> {/* Fixed spelling */}
+          <Route path="https://restarent-app.vercel.app/sidebar" element={<Sidebar />} />
+          <Route path="https://restarent-app.vercel.app/add-menu" element={<AddMenuItem />} /> {/* Fixed spelling */}
+          <Route path="https://restarent-app.vercel.app/view-menu" element={<Menu />} /> {/* Fixed spelling */}
+          <Route path="*" element={<Navigate to="https://restarent-app.vercel.app/login" />} />
+          <Route path="https://restarent-app.vercel.app/login" element={<LoginPage />} />
         </Routes>
       </div>
     </BrowserRouter>
