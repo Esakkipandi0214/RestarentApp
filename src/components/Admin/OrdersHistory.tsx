@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Layout from '../StaticComponents/layout';
 import { db } from '../../firebase'; // Adjust the path if needed
 import { collection, getDocs } from 'firebase/firestore';
-// import { Dialog, Transition } from '@headlessui/react';
-import OrderDetailsModal from './OrderTableModel'
-
+import OrderDetailsModal from './OrderTableModel';
 
 interface OrderItem {
   category: string;
@@ -23,7 +21,6 @@ interface Order {
   totalPrice: number;
 }
 
-
 const OrderSummary: React.FC = () => {
   const [orders, setOrders] = useState<Order[]>([]);
   const [filteredOrders, setFilteredOrders] = useState<Order[]>([]);
@@ -31,6 +28,7 @@ const OrderSummary: React.FC = () => {
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
   const [filterDate, setFilterDate] = useState<string>('');
   const [filterTable, setFilterTable] = useState<string>('');
+  const [filterStatus, setFilterStatus] = useState<string>('');
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -66,12 +64,16 @@ const OrderSummary: React.FC = () => {
     if (filterTable) {
       filtered = filtered.filter(order => order.table.toLowerCase().includes(filterTable.toLowerCase()));
     }
+    if (filterStatus) {
+      filtered = filtered.filter(order => order.status.toLowerCase() === filterStatus.toLowerCase());
+    }
     setFilteredOrders(filtered);
   };
 
   const resetFilters = () => {
     setFilterDate('');
     setFilterTable('');
+    setFilterStatus('');
     setFilteredOrders(orders);
   };
 
@@ -103,6 +105,16 @@ const OrderSummary: React.FC = () => {
               onChange={(e) => setFilterTable(e.target.value)}
               className="border border-gray-300 p-2 rounded"
             />
+            <select
+              value={filterStatus}
+              onChange={(e) => setFilterStatus(e.target.value)}
+              className="border border-gray-300 p-2 rounded"
+            >
+              <option value="">Filter by Status</option>
+              <option value="Paid">Paid</option>
+              <option value="Ready">Ready</option>
+              <option value="Ordered">Ordered</option>
+            </select>
             <button
               onClick={applyFilters}
               className="bg-blue-500 text-white px-4 py-2 rounded"
@@ -131,7 +143,7 @@ const OrderSummary: React.FC = () => {
           <tbody>
             {filteredOrders.map((order, index) => (
               <tr key={index} className="border-t">
-                <td className="px-6 py-2">{index+1}</td>
+                <td className="px-6 py-2">{index + 1}</td>
                 <td className="px-6 py-2">{order.table}</td>
                 <td className="px-6 py-2">{new Date(order.orderedAt).toLocaleString()}</td>
                 <td className="px-6 py-2">{order.status}</td>

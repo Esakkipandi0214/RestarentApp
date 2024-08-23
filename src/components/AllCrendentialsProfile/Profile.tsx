@@ -10,6 +10,7 @@ import {
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 import { app } from '../../firebase'; // Ensure Firebase app is initialized
 import Layout from '../StaticComponents/layout';
+import ProfileCard from './ProfileCard';
 
 
 const UpdateProfile: FC = () => {
@@ -133,6 +134,7 @@ const UpdateProfile: FC = () => {
       <main className="mt-8">
         <div className="max-w-3xl mx-auto bg-white shadow-md rounded-md p-6 dark:bg-gray-800">
           <h2 className="text-4xl text-blue-700 font-semibold mb-4">Profile</h2>
+          <div className=' grid justify-center items-center my-9'> <ProfileCard/></div>
           {error && <p className="text-red-500">{error}</p>}
           {success && <p className="text-green-500">{success}</p>}
           <form onSubmit={handleProfileUpdate} className="space-y-6 grid grid-cols-1 md:grid-cols-2 gap-6">
