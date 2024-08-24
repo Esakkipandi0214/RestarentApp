@@ -30,7 +30,7 @@ const SignUpForm: FC = () => {
         name,
         age,
         phoneNumber,
-        status: 'Pending',
+        status: 'pending',
         createdAt: new Date()
       });
 
