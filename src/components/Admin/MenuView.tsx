@@ -23,6 +23,12 @@ const Menu: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false); // State to handle sidebar visibility
   const { tableName } = useParams();
 
+  useEffect(()=>{
+    if(!tableName){
+      window.location.href ='/login';
+    }
+  },[tableName])
+
   useEffect(() => {
     const fetchMenuItems = async () => {
       try {

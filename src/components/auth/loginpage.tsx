@@ -3,7 +3,7 @@ import { auth, db } from '../../firebase'; // Adjust the path according to your 
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import InfoCard from '../Reusables/SnackBar';
 import Cookies from 'js-cookie';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc} from 'firebase/firestore';
 
 
 const LoginForm: FC = () => {
@@ -14,6 +14,7 @@ const LoginForm: FC = () => {
   const [title, setTitle] = useState<string | null>(null);
   const [description, setDescription] = useState<string | null>(null);
   const [isVisible, setIsVisible] = useState(false);
+  // const [Role,setRole] = useState<string>("")
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,14 +45,26 @@ const LoginForm: FC = () => {
         phone: ''
       });
     }
+    //set Role from StatusVerfication collection
+    const RoleCollection = doc(db,"StatusVerification",email)
+    const RoleSnapshot = await getDoc(RoleCollection)
+    if(RoleSnapshot.exists()){
+      const RoleData = RoleSnapshot.data().Role
+      localStorage.setItem("Restaurentrole",RoleData)
+      // setRole(RoleData)
+    }else{
+      console.error("No such Documnet Found")
+    }
     // Store token in local storage
     localStorage.setItem('CreditorId', user.uid);
-    
+
+    // Redirect to the dashboard or other page after successful sign-in
+
       setTitle("Success");
       setDescription("Logged in successfully!");
       setIsVisible(true);
-      // Redirect to the dashboard or other page after successful sign-in
-      window.location.href ='/dashboard';
+        window.location.href ='/all-profile';
+     
     } catch (error) {
         setTitle("Failure");
       setDescription("Login failed. Please check your email and password.");

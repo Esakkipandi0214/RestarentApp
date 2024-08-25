@@ -1,6 +1,7 @@
 // components/Sidebar.tsx
 
 import React from 'react';
+import RoleServices from '../Services/RoleServices';
 
 const Sidebar: React.FC = () => {
 
@@ -13,6 +14,7 @@ const Sidebar: React.FC = () => {
     // Example: Clear local storage or session storage
     localStorage.removeItem('authToken'); // Adjust according to your token storage method
     localStorage.removeItem('CreditorId');
+    localStorage.removeItem('Restaurentrole')
     // Redirect to login page or home page after logout
     window.location.href ='/'; // Adjust the path according to your application
   };
@@ -39,54 +41,52 @@ const Sidebar: React.FC = () => {
           </button>
         </div>
         <nav className="space-y-2">
-          <button
+          {RoleServices.isAdmin() && <><button
             className="w-full text-left p-2 hover:bg-gray-700 rounded"
             onClick={() => navigateTo('/dashboard')}
           >
             Dashboard
-          </button>
-          <button
+          </button><button
             className="w-full text-left p-2 hover:bg-gray-700 rounded"
             onClick={() => navigateTo('/Employee-verification')}
           >
-            Add Employee
-          </button>
-          <button
+              Add Employee
+            </button></>}
+          {RoleServices.isEmployee() && <button
             className="w-full text-left p-2 hover:bg-gray-700 rounded"
             onClick={() => navigateTo('/all-profile')}
           >
             Profile
-          </button>
-          <button
+          </button>}
+         {RoleServices.isAdmin() && <button
             className="w-full text-left p-2 hover:bg-gray-700 rounded"
             onClick={() => navigateTo('/add-Menu')}
           >
           Add Menu
-          </button>
-          <button
+          </button>}
+          {RoleServices.isChef() && <button
             className="w-full text-left p-2 hover:bg-gray-700 rounded"
             onClick={() => navigateTo('/view-orders')}
           >
           Order Items
-          </button>
-          <button
+          </button>}
+          {RoleServices.isWaiter() && <button
             className="w-full text-left p-2 hover:bg-gray-700 rounded"
             onClick={() => navigateTo('/delivery-orders')}
           >
           Delivery Items
-          </button>
-          <button
+          </button>}
+          {RoleServices.isAdmin() && <><button
             className="w-full text-left p-2 hover:bg-gray-700 rounded"
             onClick={() => navigateTo('/Billing-orders')}
           >
-          Billing Items
-          </button>
-          <button
+            Billing Items
+          </button><button
             className="w-full text-left p-2 hover:bg-gray-700 rounded"
             onClick={() => navigateTo('/History-orders')}
           >
-          Orders Mangement
-          </button>
+              Orders Mangement
+            </button></>}
           <button
             className="w-full text-left p-2 hover:bg-gray-700 rounded bg-red-600 mt-4"
             onClick={handleLogout}
