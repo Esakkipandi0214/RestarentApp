@@ -1,5 +1,5 @@
 // src/components/auth/DemoLoginPage.tsx
-import React, { FC, useState, useCallback } from 'react';
+import  { FC, useState, useCallback } from 'react';
 import { auth, db } from '../../firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import InfoCard from '../Reusables/SnackBar';
