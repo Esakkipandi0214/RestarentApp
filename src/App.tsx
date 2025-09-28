@@ -1,10 +1,14 @@
-import { lazy, Suspense } from 'react';
+import { lazy ,Suspense} from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import ErrorBoundary from './ErrorBoundary';
 import RoleServices from './components/Services/RoleServices';
+import LoaderWrapper from './components/UI/LoaderWrapper';
+import FoodLoader from './components/UI/FoodLoader';
+import DeviceGuard from './components/Services/DeviceGuard';
+
 
 // Lazy load components
-const LoginPage = lazy(() => import('./components/auth/loginpage'));
+const LoginPage = lazy(() => import('./components/auth/DemoLoginPage'));
 const RegisterPage = lazy(() => import('./components/auth/RegistrationPage'));
 const MainDash = lazy(() => import('./components/Main/mainDash'));
 const Profile = lazy(() => import('./components/AllCrendentialsProfile/Profile'));
@@ -21,17 +25,40 @@ function App() {
     <BrowserRouter>
       <ErrorBoundary>
         <div className="App">
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<FoodLoader/>}>
+          <LoaderWrapper delay={1000}>
             <Routes>
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
-              {RoleServices.isAdmin() && <><Route path="/dashboard" element={<MainDash />} /><Route path="/billing-orders" element={<BillingOrders />} /><Route path="/history-orders" element={<OrdersHistory />} /><Route path="/employee-verification" element={<StatusVerificationTable />} /><Route path="/add-menu" element={<AddMenuItem />} /></>}
-              {RoleServices.isEmployee() && <Route path="/all-profile" element={<Profile />} />}
               <Route path="/view-menu/:tableName" element={<Menu />} />
-              {RoleServices.isChef() && <Route path="/view-orders" element={<Orders />} />}
-              {RoleServices.isWaiter() && <Route path="/delivery-orders" element={<Delivery />} />}
               <Route path="*" element={<Navigate to="/login" />} />
+               {/* Desktop-only routes */}
+  <Route element={<DeviceGuard />}>
+    {RoleServices.isAdmin() && (
+      <>
+        <Route path="/dashboard" element={<MainDash />} />
+        <Route path="/billing-orders" element={<BillingOrders />} />
+        <Route path="/history-orders" element={<OrdersHistory />} />
+        <Route
+          path="/employee-verification"
+          element={<StatusVerificationTable />}
+        />
+        <Route path="/add-menu" element={<AddMenuItem />} />
+      </>
+    )}
+    {RoleServices.isEmployee() && (
+      <Route path="/all-profile" element={<Profile />} />
+    )}
+    {RoleServices.isChef() && (
+      <Route path="/view-orders" element={<Orders />} />
+    )}
+    {RoleServices.isWaiter() && (
+      <Route path="/delivery-orders" element={<Delivery />} />
+    )}
+  </Route>
+
             </Routes>
+            </LoaderWrapper>
           </Suspense>
         </div>
       </ErrorBoundary>

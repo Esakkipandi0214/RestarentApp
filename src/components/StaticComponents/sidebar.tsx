@@ -2,12 +2,13 @@
 
 import React from 'react';
 import RoleServices from '../Services/RoleServices';
+import {Link} from 'react-router-dom';
 
 const Sidebar: React.FC = () => {
 
-  const navigateTo = (path: string) => {
-    window.location.href = path; // Use router.push for navigation
-  };
+  // const navigateTo = (path: string) => {
+  //   window.location.href = path; // Use router.push for navigation
+  // };
 
   const handleLogout = () => {
     // Perform logout logic here, e.g., clear session or token
@@ -40,60 +41,87 @@ const Sidebar: React.FC = () => {
             </svg>
           </button>
         </div>
-        <nav className="space-y-2">
-          {RoleServices.isAdmin() && <><button
-            className="w-full text-left p-2 hover:bg-gray-700 rounded"
-            onClick={() => navigateTo('/dashboard')}
-          >
-            Dashboard
-          </button><button
-            className="w-full text-left p-2 hover:bg-gray-700 rounded"
-            onClick={() => navigateTo('/Employee-verification')}
-          >
-              Add Employee
-            </button></>}
-          {RoleServices.isEmployee() && <button
-            className="w-full text-left p-2 hover:bg-gray-700 rounded"
-            onClick={() => navigateTo('/all-profile')}
-          >
-            Profile
-          </button>}
-         {RoleServices.isAdmin() && <button
-            className="w-full text-left p-2 hover:bg-gray-700 rounded"
-            onClick={() => navigateTo('/add-Menu')}
-          >
-          Add Menu
-          </button>}
-          {RoleServices.isChef() && <button
-            className="w-full text-left p-2 hover:bg-gray-700 rounded"
-            onClick={() => navigateTo('/view-orders')}
-          >
-          Order Items
-          </button>}
-          {RoleServices.isWaiter() && <button
-            className="w-full text-left p-2 hover:bg-gray-700 rounded"
-            onClick={() => navigateTo('/delivery-orders')}
-          >
-          Delivery Items
-          </button>}
-          {RoleServices.isAdmin() && <><button
-            className="w-full text-left p-2 hover:bg-gray-700 rounded"
-            onClick={() => navigateTo('/Billing-orders')}
-          >
-            Billing Items
-          </button><button
-            className="w-full text-left p-2 hover:bg-gray-700 rounded"
-            onClick={() => navigateTo('/History-orders')}
-          >
-              Orders Mangement
-            </button></>}
-          <button
-            className="w-full text-left p-2 hover:bg-gray-700 rounded bg-red-600 mt-4"
-            onClick={handleLogout}
-          >
-            Logout
-          </button>
-        </nav>
+       <nav className="space-y-2">
+  {RoleServices.isAdmin() && (
+    <>
+      <Link
+        to="/dashboard"
+        className="block w-full text-left p-2 rounded hover:bg-gray-700"
+      >
+        Dashboard
+      </Link>
+
+      <Link
+        to="/Employee-verification"
+        className="block w-full text-left p-2 rounded hover:bg-gray-700"
+      >
+        Add Employee
+      </Link>
+    </>
+  )}
+
+  {RoleServices.isEmployee() && (
+    <Link
+      to="/all-profile"
+      className="block w-full text-left p-2 rounded hover:bg-gray-700"
+    >
+      Profile
+    </Link>
+  )}
+
+  {RoleServices.isAdmin() && (
+    <Link
+      to="/add-Menu"
+      className="block w-full text-left p-2 rounded hover:bg-gray-700"
+    >
+      Add Menu
+    </Link>
+  )}
+
+  {RoleServices.isChef() && (
+    <Link
+      to="/view-orders"
+      className="block w-full text-left p-2 rounded hover:bg-gray-700"
+    >
+      Order Items
+    </Link>
+  )}
+
+  {RoleServices.isWaiter() && (
+    <Link
+      to="/delivery-orders"
+      className="block w-full text-left p-2 rounded hover:bg-gray-700"
+    >
+      Delivery Items
+    </Link>
+  )}
+
+  {RoleServices.isAdmin() && (
+    <>
+      <Link
+        to="/Billing-orders"
+        className="block w-full text-left p-2 rounded hover:bg-gray-700"
+      >
+        Billing Items
+      </Link>
+
+      <Link
+        to="/History-orders"
+        className="block w-full text-left p-2 rounded hover:bg-gray-700"
+      >
+        Orders Management
+      </Link>
+    </>
+  )}
+
+  <button
+    onClick={handleLogout}
+    className="block w-full text-left p-2 rounded bg-red-600 hover:bg-red-700 mt-4"
+  >
+    Logout
+  </button>
+</nav>
+
       </div>
     </div>
   );

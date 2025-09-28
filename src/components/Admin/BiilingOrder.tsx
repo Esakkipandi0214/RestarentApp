@@ -64,6 +64,12 @@ const OrderSummary: React.FC = () => {
 
   return (
     <Layout>
+      <div className="max-h-[95vh] overflow-y-auto p-4"
+        style={{
+    scrollbarWidth: "none",        // Firefox
+    msOverflowStyle: "none",       // IE & Edge
+  }}
+      >
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-6">
         {orders
         .filter(order => ((order.status === 'Deliverd')||((order.status === 'Paid'))))
@@ -102,6 +108,7 @@ const OrderSummary: React.FC = () => {
             )}
           </div>
         ))}
+      </div>
       </div>
     </Layout>
   );

@@ -181,47 +181,52 @@ const MenuItemsTable: React.FC = () => {
         </div>
       )}
 
-      <table className="min-w-full bg-white border border-gray-300">
-        <thead>
-          <tr>
-            <th className="py-2 px-4 border-b">ID</th>
-            <th className="py-2 px-4 border-b">Category</th>
-            <th className="py-2 px-4 border-b">Item Name</th>
-            <th className="py-2 px-4 border-b">Price</th>
-            <th className="py-2 px-4 border-b">Actions</th>
+      <div className="max-h-96 overflow-y-auto border border-gray-300 rounded-md">
+  <table className="min-w-full bg-white">
+    <thead className="sticky top-0 bg-gray-100 z-10">
+      <tr>
+        <th className="py-2 px-4 border-b">ID</th>
+        <th className="py-2 px-4 border-b">Category</th>
+        <th className="py-2 px-4 border-b">Item Name</th>
+        <th className="py-2 px-4 border-b">Price</th>
+        <th className="py-2 px-4 border-b">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {filteredItems.length > 0 ? (
+        filteredItems.map((item, index) => (
+          <tr key={index}>
+            <td className="py-2 px-4 border-b">{index + 1}</td>
+            <td className="py-2 px-4 border-b">{item.category}</td>
+            <td className="py-2 px-4 border-b">{item.itemName}</td>
+            <td className="py-2 px-4 border-b">${item.price}</td>
+            <td className="py-2 px-4 border-b">
+              <button
+                onClick={() => handleEditClick(item)}
+                className="px-3 py-1 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 transition-colors duration-300"
+              >
+                Edit
+              </button>
+              <button
+                onClick={() => handleDeleteClick(item.id)}
+                className="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors duration-300 ml-2"
+              >
+                Delete
+              </button>
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          {filteredItems.length > 0 ? (
-            filteredItems.map((item,index) => (
-              <tr key={index}>
-                <td className="py-2 px-4 border-b">{index+1}</td>
-                <td className="py-2 px-4 border-b">{item.category}</td>
-                <td className="py-2 px-4 border-b">{item.itemName}</td>
-                <td className="py-2 px-4 border-b">${item.price}</td>
-                <td className="py-2 px-4 border-b">
-                  <button
-                    onClick={() => handleEditClick(item)}
-                    className="px-3 py-1 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 transition-colors duration-300"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => handleDeleteClick(item.id)}
-                    className="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors duration-300 ml-2"
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan={5} className="py-2 px-4 text-center">No items found</td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+        ))
+      ) : (
+        <tr>
+          <td colSpan={5} className="py-2 px-4 text-center">
+            No items found
+          </td>
+        </tr>
+      )}
+    </tbody>
+  </table>
+</div>
+
     </div>
   );
 };
