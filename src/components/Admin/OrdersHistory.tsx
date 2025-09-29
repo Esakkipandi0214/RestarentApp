@@ -58,7 +58,7 @@ const OrderSummary: React.FC = () => {
 
   const applyFilters = () => {
     let filtered = orders;
-    if (filterDate) {
+    if (filterDate) { 
       filtered = filtered.filter(order => new Date(order.orderedAt).toLocaleDateString() === new Date(filterDate).toLocaleDateString());
     }
     if (filterTable) {
@@ -89,7 +89,7 @@ const OrderSummary: React.FC = () => {
 
   return (
     <Layout>
-      <div className="p-6">
+      <div className="p-6 h-full">
         <div className="flex justify-between mb-4">
           <div className="flex space-x-4">
             <input
@@ -129,8 +129,9 @@ const OrderSummary: React.FC = () => {
             </button>
           </div>
         </div>
+        <div style={{scrollbarWidth: "none", msOverflowStyle:"none"}} className=" overflow-y-auto border h-[80%] border-gray-300 rounded-md">
         <table className="min-w-full bg-white">
-          <thead>
+          <thead className=' sticky top-0 z-10 bg-white shadow'>
             <tr>
               <th className="px-6 py-2">Order ID</th>
               <th className="px-6 py-2">Table</th>
@@ -160,6 +161,7 @@ const OrderSummary: React.FC = () => {
             ))}
           </tbody>
         </table>
+        </div>
 
         <OrderDetailsModal order={selectedOrder} isOpen={isOpen} onClose={closeModal} />
       </div>

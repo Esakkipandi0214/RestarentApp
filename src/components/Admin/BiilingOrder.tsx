@@ -64,17 +64,17 @@ const OrderSummary: React.FC = () => {
 
   return (
     <Layout>
-      <div className="max-h-[95vh] overflow-y-auto p-4"
+      <div className="max-h-[95vh] w-full overflow-y-auto "
         style={{
     scrollbarWidth: "none",        // Firefox
     msOverflowStyle: "none",       // IE & Edge
   }}
       >
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-6">
+      <div className="grid grid-cols-1 w-full p-2 md:grid-cols-2 lg:grid-cols-3  xl:grid-cols-4 gap-4">
         {orders
         .filter(order => ((order.status === 'Deliverd')||((order.status === 'Paid'))))
         .map((order, index) => (
-          <div key={index} className="flex flex-col p-4 space-y-4 divide-y bg-white border border-gray-200 rounded-lg shadow-lg min-w-[300px] max-w-sm h-auto">
+          <div key={index} className="flex flex-col p-4 space-y-4 divide-y bg-white border border-gray-200 rounded-lg shadow-lg min-w-[300px] max-w-48 h-auto">
             <h2 className="text-xl font-semibold text-blue-600 truncate">Order ID: {order.table}</h2>
             <p className="text-sm text-gray-600">Table: {order.table}</p>
             <p className="text-xs text-gray-400">Ordered At: {new Date(order.orderedAt).toLocaleString()}</p>

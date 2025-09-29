@@ -5,6 +5,7 @@ import RoleServices from './components/Services/RoleServices';
 import LoaderWrapper from './components/UI/LoaderWrapper';
 import FoodLoader from './components/UI/FoodLoader';
 import DeviceGuard from './components/Services/DeviceGuard';
+import MobileGuard from './components/Services/MobileGuard';
 
 
 // Lazy load components
@@ -24,13 +25,15 @@ function App() {
   return (
     <BrowserRouter>
       <ErrorBoundary>
-        <div className="App">
+        {/* <div className="App" style={{scrollbarWidth:"none", msOverflowStyle:"none"}}> */}
           <Suspense fallback={<FoodLoader/>}>
           <LoaderWrapper delay={1000}>
             <Routes>
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
+              <Route element={<MobileGuard />}>
               <Route path="/view-menu/:tableName" element={<Menu />} />
+              </Route>
               <Route path="*" element={<Navigate to="/login" />} />
                {/* Desktop-only routes */}
   <Route element={<DeviceGuard />}>
@@ -60,7 +63,7 @@ function App() {
             </Routes>
             </LoaderWrapper>
           </Suspense>
-        </div>
+        {/* </div> */}
       </ErrorBoundary>
     </BrowserRouter>
   );
