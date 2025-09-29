@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { collection, getDocs, doc, setDoc } from 'firebase/firestore';
 import { db } from '../../firebase'; // Adjust the path according to your project structure
 import { useParams } from 'react-router-dom';
-import { FiMenu, FiX } from 'react-icons/fi'; // Import a menu icon from react-icons
+import { FiMenu, FiX, FiCheckCircle, FiXCircle } from 'react-icons/fi'; // Import a menu icon from react-icons
 
 interface MenuItem {
   id: string;
@@ -22,6 +22,8 @@ const Menu: React.FC = () => {
   const [selectedItems, setSelectedItems] = useState<Map<string, number>>(new Map());
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false); // State to handle sidebar visibility
   const [showSummery, setShowSummery] = useState(false)
+  const [toast, setToast] = useState<{ message: string; success: boolean } | null>(null);
+
   const { tableName } = useParams();
 
   useEffect(()=>{
@@ -105,14 +107,20 @@ const Menu: React.FC = () => {
           totalPrice, // Store the total price in the order document
         });
   
-        alert('Items ordered successfully!');
+        // alert('Items ordered successfully!');
+       setToast({ message: 'Order placed successfully!', success: true });
+        setTimeout(() => setToast(null), 3000);
         setSelectedItems(new Map()); // Clear selections after ordering
         setSelectedCategory(null);
       } catch (error) {
         console.error('Error ordering items:', error);
+         setToast({ message: 'Failed to place order. Try again.', success: false });
+          setTimeout(() => setToast(null), 3000);
       }
     } else {
-      alert('Please select at least one item to order.');
+      // alert('Please select at least one item to order.');
+       setToast({ message: 'Select at least one item to order.', success: false });
+        setTimeout(() => setToast(null), 3000);
     }
   };  
 
@@ -145,6 +153,33 @@ const Menu: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col md:flex-row">
+
+   {toast && (
+      <div className="fixed top-5  w-full z-50">
+        <div
+          className={`flex items-center space-x-4 px-4 mx-auto py-3 rounded-xl shadow-lg
+          ${toast.success ? 'bg-teal-600' : 'bg-red-600'} text-white min-w-[280px] max-w-sm`}
+        >
+          {/* Icon */}
+          <div className="text-2xl">
+            {toast.success ? <FiCheckCircle /> : <FiXCircle />}
+          </div>
+
+          {/* Image / Menu icon */}
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png"
+            alt="menu"
+            className="w-10 h-10 rounded-full object-cover"
+          />
+
+          {/* Message */}
+          <div className="flex-1">
+            <p className="font-medium">{toast.message}</p>
+          </div>
+        </div>
+      </div>
+    )}
+
   {/* Toggle Button for Mobile */}
   <button
     className="md:hidden p-4 text-teal-700 hover:text-teal-900 transition"
